@@ -135,7 +135,7 @@ When running the script, you will see the progress bar (if pv is installed corre
 
 ## Next Steps
 
-This project is part of the *Data Journey*
+This project is part of the *Data Journey* [Luciano Galvão](https://github.com/lvgalvao)
 
 Our mission is to provide the best teaching in data engineering
 
