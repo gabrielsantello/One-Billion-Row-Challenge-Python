@@ -1,14 +1,14 @@
-# Um Bilhão de Linhas: Desafio de Processamento de Dados com Python
+# One Billion Lines: Python Data Processing Challenge
 
-## Introdução
+## Introduction
 
-O objetivo deste projeto é demonstrar como processar eficientemente um arquivo de dados massivo contendo 1 bilhão de linhas (~14GB), especificamente para calcular estatísticas (Incluindo agregação e ordenação que são operações pesadas) utilizando Python. 
+The goal of this project is to demonstrate how to efficiently process a massive data file containing 1 billion lines (~14GB), specifically to calculate statistics (including aggregation and sorting which are heavy operations) using Python.
 
-Este desafio foi inspirado no [The One Billion Row Challenge](https://github.com/gunnarmorling/1brc), originalmente proposto para Java.
+This challenge was inspired by [The One Billion Row Challenge](https://github.com/gunnarmorling/1brc), originally proposed for Java.
 
-O arquivo de dados consiste em medições de temperatura de várias estações meteorológicas. Cada registro segue o formato `<string: nome da estação>;<double: medição>`, com a temperatura sendo apresentada com precisão de uma casa decimal.
+The data file consists of temperature measurements from various weather stations. Each record follows the format `<string: station name>;<double: measurement>`, with the temperature being presented with precision to one decimal place.
 
-Aqui estão dez linhas de exemplo do arquivo:
+Here are ten example lines from the file:
 
 ```
 Hamburg;12.0
@@ -23,7 +23,7 @@ Conakry;31.2
 Istanbul;23.0
 ```
 
-O desafio é desenvolver um programa Python capaz de ler esse arquivo e calcular a temperatura mínima, média (arredondada para uma casa decimal) e máxima para cada estação, exibindo os resultados em uma tabela ordenada por nome da estação.
+The challenge is to develop a Python program capable of reading this file and calculating the minimum, average (rounded to one decimal place), and maximum temperature for each station, displaying the results in a table sorted by station name.
 
 | station      | min_temperature | mean_temperature | max_temperature |
 |--------------|-----------------|------------------|-----------------|
@@ -49,99 +49,100 @@ O desafio é desenvolver um programa Python capaz de ler esse arquivo e calcular
 | Ürümqi       | -42.1           | 7.4              | 56.7            |
 | İzmir        | -34.4           | 17.9             | 67.9            |
 
-## Dependências
+## Dependencies
 
-Para executar os scripts deste projeto, você precisará das seguintes bibliotecas:
+To run the scripts of this project, you will need the following libraries:
 
 * Polars: `0.20.3`
 * DuckDB: `0.10.0`
 * Dask[complete]: `^2024.2.0`
 
-## Resultados
+## Results
 
-Os testes foram realizados em um laptop equipado com um processador M1 da Apple e 8GB de RAM. As implementações utilizaram abordagens puramente Python, Pandas, Dask, Polars e DuckDB. Os resultados de tempo de execução para processar o arquivo de 1 bilhão de linhas são apresentados abaixo:
+The tests were carried out on a laptop equipped with an Apple M1 processor and 8GB of RAM. The implementations used purely Python, Pandas, Dask, Polars, and DuckDB approaches. The runtime results for processing the 1 billion line file are presented below:
 
-| Implementação | Tempo |
+| Implementation | Time |
 | --- | --- |
-| Bash + awk | 25 minutos |
-| Python | 20 minutos |
+| Bash + awk | 25 minutes |
+| Python | 20 minutes |
 | Python + Pandas | 263 sec |
 | Python + Dask | 155.62 sec  |
 | Python + Polars | 33.86 sec |
 | Python + Duckdb | 14.98 sec |
 
-Obrigado por [Koen Vossen](https://github.com/koenvo) pela implementação em Polars e [Arthur Julião](https://github.com/ArthurJ) pela implementação em Python e Bash 
+Thanks to [Koen Vossen](https://github.com/koenvo) for the Polars implementation and [Arthur Julião](https://github.com/ArthurJ) for the Python and Bash implementation.
 
-## Conclusão
+## Conclusion
 
-Este desafio destacou claramente a eficácia de diversas bibliotecas Python na manipulação de grandes volumes de dados. Métodos tradicionais como Bash (25 minutos), Python puro (20 minutos) e até mesmo o Pandas (5 minutos) demandaram uma série de táticas para implementar o processamento em "lotes", enquanto bibliotecas como Dask, Polars e DuckDB provaram ser excepcionalmente eficazes, requerendo menos linhas de código devido à sua capacidade inerente de distribuir os dados em "lotes em streaming" de maneira mais eficiente. O DuckDB se sobressaiu, alcançando o menor tempo de execução graças à sua estratégia de execução e processamento de dados.
+This challenge clearly highlighted the effectiveness of various Python libraries in handling large volumes of data. Traditional methods such as Bash (25 minutes), pure Python (20 minutes), and even Pandas (5 minutes) required a series of tactics to implement batch processing, while libraries like Dask, Polars, and DuckDB proved to be exceptionally effective, requiring fewer lines of code due to their inherent ability to distribute data in "streaming batches" more efficiently. DuckDB stood out, achieving the shortest runtime thanks to its data execution and processing strategy.
 
-Esses resultados enfatizam a importância de selecionar a ferramenta adequada para análise de dados em larga escala, demonstrando que Python, com as bibliotecas certas, é uma escolha poderosa para enfrentar desafios de big data.
+These results emphasize the importance of selecting the right tool for large-scale data analysis, demonstrating that Python, with the right libraries, is a powerful choice to tackle big data challenges.
 
-Duckdb vence tambem com 1 milhao de linhas, realmente é o melhor
+Duckdb also wins with 1 million lines, it really is the best.
 
-## Como Executar
+## How to Run
 
-Para executar este projeto e reproduzir os resultados:
+To run this project and reproduce the results:
 
-1. Clone esse repositório `git clone {ssh do repositório}`
-2. Definir a versao do Python usando o `pyenv local 3.12.1`
-2. `poetry env use 3.12.1`, `poetry install --no-root` e `poetry lock --no-update`
-3. Execute o comando `python src/create_measurements.py` para gerar o arquivo de teste - variável está setada para 1M para facilitação `num_rows_to_create = 1000000`
-4. Tenha paciência e vá fazer um café, vai demorar uns 10 minutos para gerar o arquivo
-5. Certifique-se de instalar as versões especificadas das bibliotecas Dask, Polars e DuckDB
-6. Execute os scripts `python src/using_python.py`, `python src/using_pandas.py`, `python src/using_dask.py`, `python src/using_polars.py` e `python src/using_duckdb.py` através de um terminal ou ambiente de desenvolvimento que suporte Python.
+1. Clone this repository `git clone {ssh of the repository}`
+2. Set the Python version using `pyenv local 3.12.1`
+3. `poetry env use 3.12.1`, `poetry install --no-root` and `poetry lock --no-update`
+4. Run the command `python src/create_measurements.py` to generate the test file - variable is set to 1M for facilitation `num_rows_to_create = 1000000`
+5. Be patient and go make a coffee, it will take about 10 minutes to generate the file
+6. Make sure to install the specified versions of the Dask, Polars, and DuckDB libraries
+7. Run the scripts `python src/using_python.py`, `python src/using_pandas.py`, `python src/using_dask.py`, `python src/using_polars.py` and `python src/using_duckdb.py` through a terminal or development environment that supports Python.
 
-Este projeto destaca a versatilidade do ecossistema Python para tarefas de processamento de dados, oferecendo valiosas lições sobre escolha de ferramentas para análises em grande escala.
+This project highlights the versatility of the Python ecosystem for data processing tasks, offering valuable lessons about tool choice for large-scale analyses.
 
 ## Bonus
 
-Para rodar o script Bash descrito, você precisa seguir alguns passos simples. Primeiro, assegure-se de que você tenha um ambiente Unix-like, como Linux ou macOS, que suporta scripts Bash nativamente. Além disso, verifique se as ferramentas utilizadas no script (`wc`, `head`, `pv`, `awk`, e `sort`) estão instaladas em seu sistema. A maioria dessas ferramentas vem pré-instalada em sistemas Unix-like, mas `pv` (Pipe Viewer) pode precisar ser instalado manualmente.
+To run the described Bash script, you need to follow a few simple steps. First, make sure you have a Unix-like environment, such as Linux or macOS, that supports Bash scripts natively. Also, check that the tools used in the script (`wc`, `head`, `pv`, `awk`, and `sort`) are installed on your system. Most of these tools come pre-installed on Unix-like systems, but `pv` (Pipe Viewer) may need to be installed manually.
 
-### Instalando o Pipe Viewer (pv)
+### Installing Pipe Viewer (pv)
 
-Se você não tem o `pv` instalado, pode facilmente instalá-lo usando o gerenciador de pacotes do seu sistema. Por exemplo:
+If you don't have `pv` installed, you can easily install it using your system's package manager. For example:
 
-* No Ubuntu/Debian:
+* On Ubuntu/Debian:
     
     ```bash
     sudo apt-get update
     sudo apt-get install pv
     ```
     
-* No macOS (usando [Homebrew](https://brew.sh/)):
+* On macOS (using [Homebrew](https://brew.sh/)):
     
     ```bash
     brew install pv
     ```
     
-### Preparando o Script
+### Preparing the Script
 
-1. Dê permissão de execução para o arquivo script. Abra um terminal e execute:
+1. Give execution permission to the script file. Open a terminal and run:
     
     ```bash
     chmod +x process_measurements.sh
     ```
 
-2. Rode o script. Abra um terminal e execute:
+2. Run the script. Open a terminal and run:
    
    ```bash
    ./src/using_bash_and_awk.sh 1000
    ```
 
-Neste exemplo, apenas as primeiras 1000 linhas serão processadas.
+In this example, only the first 1000 lines will be processed.
 
-Ao executar o script, você verá a barra de progresso (se pv estiver instalado corretamente) e, eventualmente, a saída esperada no terminal ou em um arquivo de saída, se você decidir modificar o script para direcionar a saída.
+When running the script, you will see the progress bar (if pv is installed correctly) and eventually the expected output in the terminal or in an output file, if you decide to modify the script to direct the output.
 
-## Próximos passos
+## Next Steps
 
-Esse projeto faz parte da *Jornada de Dados*
-Nossa missão é fornecer o melhor ensino em engenharia de dados
+This project is part of the *Data Journey*
 
-Se você quer:
+Our mission is to provide the best teaching in data engineering
 
-- Aprender sobre Duckdb e engenharia de dados
-- Construir uma base sólida em Python e SQL
-- Criar ou melhorar seu portfólio de dados
-- Criar ou aumentar o seu networking na área
-- Mudar ou dar o próximo passo em sua carreira
+If you want to:
+
+- Learn about Duckdb and data engineering
+- Build a solid foundation in Python and SQL
+- Create or improve your data portfolio
+- Create or increase your networking in the area
+- Change or take the next step in your career
